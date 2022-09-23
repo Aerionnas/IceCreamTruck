@@ -1,0 +1,1 @@
+This program utilizes Object Oriented Program. It includes multiples Java classes that are needed to run an ice cream truck. In this program, you will see the following used: getters and setters, arraylists, arrays, Scanner, etc.
