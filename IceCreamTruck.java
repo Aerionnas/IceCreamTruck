@@ -19,30 +19,26 @@ public class IceCreamTruck {
 
     private static double expectedSales = 0;
 
-    public static double cashInTruck = cashbox.getStartCash();
 
-    public IceCreamTruck() {
 
-    }
 
-    
 
 
     public static void checkCashBox(){
         // totalIceCreamBought wholesaleprice
-        double totalIceCreamBought=0;
-        double amountOfIceCreamSold=0;
-        
+        double totalIceCreamBought = 0;
+        double amountOfIceCreamSold = 0;
+
         for (Flavor flav : flavors){
             totalIceCreamBought += flav.getAmountOfStartingScoops() * flav.getWholesaleCost();
-            amountOfIceCreamSold += (flav.getAmountOfStartingScoops() - flav.getAmountOfScoops()) * flav.getCostPerScoop();   
+            amountOfIceCreamSold += (flav.getAmountOfStartingScoops() - flav.getAmountOfScoops()) * flav.getCostPerScoop();
         }
         double profit = amountOfIceCreamSold - totalIceCreamBought;
         System.out.println("Here is the Cashbox Receipt.");
         System.out.printf("We started with $ %1.2f worth of ice cream on this ice cream truck. %n", totalIceCreamBought);
         System.out.printf("We sold a total of $ %1.2f worth of Ice cream today. %n", amountOfIceCreamSold);
         System.out.printf("As a result of today's sales, we expect to make $ %1.2f. If this number does not match the previous figure, someone is getting fired!!! %n", expectedSales);
-        System.out.printf("we started with $ %1.2f at the beginning of the shift. We now have $ %1.2f, and we have a profit of $ %1.2f. %n", cashbox.getStartCash(), cashInTruck, profit);
+        System.out.printf("we started with $ %1.2f at the beginning of the shift. We now have $ %1.2f, and we have a profit of $ %1.2f. %n", cashbox.getStartCash(), cashbox.getCashInTruck(), profit);
 
     }
     public static void makeSale() {
@@ -67,7 +63,8 @@ public class IceCreamTruck {
 
             expectedSales +=  flavors.get(number).getCostPerScoop() * numOfScoopsRequested;
 
-            cashInTruck += flavors.get(number).getCostPerScoop()* numOfScoopsRequested;
+            cashbox.setCashInTruck(cashbox.getCashInTruck() + flavors.get(number).getCostPerScoop() * numOfScoopsRequested);
+
 
             System.out.println("Thank you.");
 
@@ -92,7 +89,7 @@ public class IceCreamTruck {
     }
 
     public static void startRoute() {
-        System.out.println("Select an Employee. Here is a list of employees.");
+        System.out.println("Select an Employee by inputting a number. Here is a list of employees.");
 
         Boolean invalid = true;
         int count = 0;
@@ -238,7 +235,7 @@ public class IceCreamTruck {
 
         do {
             try {
-                System.out.println("Try Again. True or false: You want this employee to have access to the register?");
+                System.out.println("True or false: You want this employee to have access to the register?");
                 hasAccessToRegister = userInput.nextBoolean();
                 if (hasAccessToRegister == true) {
                     System.out.println(employeeName + " now has access to the register.");
@@ -263,7 +260,7 @@ public class IceCreamTruck {
 
         do {
             try {
-                System.out.println("Try Again. True or false: This employee to have permission to drive?");
+                System.out.println("True or false: This employee to have permission to drive?");
                 ableToDrive = userInput.nextBoolean();
                 if (ableToDrive == true) {
                     System.out.println(employeeName + " now has the permissions to drive.");
@@ -298,11 +295,12 @@ public class IceCreamTruck {
         System.out.println("4: Check Cash Box");
         System.out.println("Enter any other number to quit");
         int number = userInput.nextInt();
+        userInput.nextLine();
 
         if (number == 1) {
             addNewFlavor();
             chooseOption();
-            
+
         }
 
         else if (number == 2) {
@@ -313,7 +311,7 @@ public class IceCreamTruck {
         else if (number == 3) {
             startRoute();
             makeSale();
-            chooseOption();
+
 
 
             boolean quit = false;
@@ -323,7 +321,7 @@ public class IceCreamTruck {
             do {
 
                 String answer = userInput.nextLine();
-                
+
 
                 if (answer.toLowerCase().equals("yes")) {
                     System.out.print("ok.");
@@ -377,6 +375,7 @@ public class IceCreamTruck {
         String response = userInput.nextLine();
         if (response.toLowerCase().equals("yes")) {
             addNewFlavor();
+            chooseOption();
         } else if (response.toLowerCase().equals("no")) {
             chooseOption();
         }

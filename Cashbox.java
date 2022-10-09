@@ -15,7 +15,7 @@ public class Cashbox{
         this.totalIceCreamBought = 0;
         this.dollarAmountOfIceCreamSold = 0;
         this.expectedSalesFromMissingInventory = 0;
-        
+
         this.profit= 0;
     }
 
@@ -24,7 +24,7 @@ public class Cashbox{
         System.out.println("Welcome to your Ice Cream Truck!");
         System.out.println("How much money would you like to give your truck to start?");
         double cash= input.nextDouble();
-    
+
 
         while (cash <= 100){
             System.out.println("You cannot start an ice cream truck without sufficient funds. You must start with at lest $101. Try Again!");
@@ -35,8 +35,10 @@ public class Cashbox{
         System.out.println("Cash accepted.");
 
         setStartingCash(cash);
+        setCashInTruck(cash);
 
-        
+
+
     }
 
     public double getStartCash(){
@@ -55,15 +57,19 @@ public class Cashbox{
         return expectedSalesFromMissingInventory;
     }
 
-    
+    public double getCashInTruck(){
+      return this.cashInTruck;
+    }
+
+
     public double getProfit(){
         return profit;
     }
     // setters
 
-   
+
     public void setTotalIceCreamBought( double newTotal){
-        
+
         this.totalIceCreamBought= newTotal;
     }
 
